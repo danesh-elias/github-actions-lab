@@ -1,0 +1,24 @@
+name: CI Lab
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci-lab:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Print greeting
+        run: echo "Hello from GitHub Actions"
+
+      - name: Print system information
+        run: |
+          whoami
+          uname -a
+
+      - name: Print environment variables
+        run: env
