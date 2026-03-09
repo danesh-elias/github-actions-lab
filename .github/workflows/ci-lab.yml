@@ -14,11 +14,36 @@ jobs:
 
       - name: Print greeting
         run: echo "Hello from GitHub Actions"
+        shell: bash
 
       - name: Print system information
         run: |
           whoami
           uname -a
+        shell: bash
 
-      - name: Print environment variables
-        run: env
+      - name: Show current directory
+        run: |
+          pwd
+          ls -la
+        shell: bash
+
+      - name: Show installed Python version
+        run: python3 --version
+        shell: bash
+
+      - name: Show installed Node version
+        run: node --version
+        shell: bash
+
+      - name: Show disk usage
+        run: df -h
+        shell: bash
+
+      - name: Show network interfaces
+        run: ip addr show
+        shell: bash
+
+      - name: Show all environment variables
+        run: env | sort
+        shell: bash
