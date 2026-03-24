@@ -12,36 +12,29 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Step 1 - Checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Step 2 - Show repo content
-        run: |
-          echo "Listing files:"
-          ls -la
-
-      - name: Step 3 - Simulate build
+      - name: Build site
         run: |
           mkdir dist
           cp index.html dist/
           echo "<p>Built at $(date)</p>" >> dist/index.html
 
-      - name: Step 4 - Show build output
-        run: |
-          echo "Build output:"
-          ls -la dist
-          cat dist/index.html
-
-      - name: Step 5 - Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: website
           path: dist
 
-      - name: Step 6 - Deploy to GitHub Pages
+      - name: Deploy
         uses: actions/deploy-pages@v4
